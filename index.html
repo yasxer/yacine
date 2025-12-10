@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overdue Report - Upload XLS</title>
+</head>
+  <style>
+    :root{--brand:#2468f2;--muted:#666;--card:#ffffff}
+    html,body{height:100%;}
+    body { font-family: Inter, Arial, "DejaVu Sans", Tahoma; background:linear-gradient(180deg,#f4f6fb,#ffffff); padding:32px; margin:0; color:#222 }
+    .wrap{max-width:920px;margin:0 auto}
+    header.app-header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--brand),#5aa0ff);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px}
+    .title{font-size:20px;font-weight:700}
+    .subtitle{color:var(--muted);font-size:13px}
+    .container { background:var(--card); padding:22px; border-radius:12px; box-shadow:0 6px 18px rgba(36,104,242,0.08); }
+    form .row{display:flex;gap:12px;align-items:center}
+    label { display:block; margin-bottom:8px; font-weight:600; }
+    input[type=file], select { width:100%; padding:12px; margin-bottom:12px; border:1px solid #e6eefc; border-radius:8px; background:#fbfcff }
+    button { padding:10px 18px; background:var(--brand); color:#fff; border:none; border-radius:10px; cursor:pointer; font-weight:700 }
+    button:hover{filter:brightness(.98)}
+    .note{color:var(--muted);font-size:13px}
+    
+    footer{margin-top:12px;text-align:center;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="app-header">
+      <div class="logo">R</div>
+      <div>
+        <div class="title">Overdue Installment Report</div>
+        <div class="subtitle">Upload a legacy .XLS file and generate a clean PDF of overdue clients</div>
+      </div>
+    </header>
+
+    <div class="container">
+      <form action="generate_report.php" method="post" enctype="multipart/form-data">
+        <div class="row">
+          <div style="flex:1">
+            <label for="xls_file">Excel file (.xls)</label>
+            <input type="file" id="xls_file" name="xls_file" accept=".xls" required>
+          </div>
+          <div style="width:260px">
+            <label for="report_type">Report type</label>
+            <select id="report_type" name="report_type">
+              <option value="overdue">Over 30 days overdue (overdue)</option>
+              <option value="24_31">Early Warning 24-31 days (24_31)</option>
+              <option value="30_37">Early Warning 30-37 days (30_37)</option>
+              <option value="37_44">Advanced Warning 37-44 days (37_44)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:center;margin-top:10px">
+          <button type="submit">Create PDF Report</button>
+          <div class="note">Accepted: Excel 97-2003 <strong>.xls</strong> files only. Max file size depends on server settings.</div>
+        </div>
+      </form>
+    </div>
+
+    <footer>
+      <div class="note">Expected columns: A=Client Code, B=Name, C=Contact, E=Solde, F=Date of Last Payment.</div>
+    </footer>
+  </div>
+</body>
+</html>
