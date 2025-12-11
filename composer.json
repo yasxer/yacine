@@ -1,0 +1,16 @@
+{
+    "name": "yacine/installment-report",
+    "description": "Installment tracking report tool: upload .XLS and generate overdue PDF reports",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "phpoffice/phpspreadsheet": "^1.28",
+        "dompdf/dompdf": "^2.0",
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
